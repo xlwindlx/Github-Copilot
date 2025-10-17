@@ -1,0 +1,12 @@
+[tool.black]
+line-length = 100
+target-version = ["py312", "py311", "py310", "py39"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py39"
+extend-select = ["E", "F", "I"]
+ignore = ["E203"]
+
+[tool.ruff.isort]
+known-first-party = ["apps", "memojjang"]
