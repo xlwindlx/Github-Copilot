@@ -1,5 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from django.shortcuts import get_object_or_404
+from django.http import Http404
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
@@ -28,7 +28,7 @@ class MemoDetailView(LoginRequiredMixin, DetailView):
 		obj = super().get_object(queryset)
 		if obj.owner != self.request.user and not obj.is_public:
 			# 비공개 문서는 소유자만 볼 수 있음
-			return get_object_or_404(Memo, pk=0)  # 의도적으로 404
+			raise Http404("Not found")
 		return obj
 
 
@@ -46,10 +46,18 @@ class MemoUpdateView(LoginRequiredMixin, OwnerRequiredMixin, UpdateView):
 	model = Memo
 	form_class = MemoForm
 	success_url = reverse_lazy("memos:list")
+    
+	def get_queryset(self):
+		# 소유자 문서만 편집 가능
+		return Memo.objects.filter(owner=self.request.user)
 
 
 class MemoDeleteView(LoginRequiredMixin, OwnerRequiredMixin, DeleteView):
 	model = Memo
 	success_url = reverse_lazy("memos:list")
+    
+	def get_queryset(self):
+		# 소유자 문서만 삭제 가능
+		return Memo.objects.filter(owner=self.request.user)
 
 # Create your views here.
