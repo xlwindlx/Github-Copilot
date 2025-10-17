@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}내 메모 목록{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h1 class="h3 m-0">내 메모</h1>
+  <a href="{% url 'memos:create' %}" class="btn btn-primary">새 메모</a>
+</div>
+<form method="get" class="row g-2 mb-3">
+  <div class="col-auto">
+    <select name="category" class="form-select">
+      <option value="">- 범주 전체 -</option>
+      <option value="daily" {% if request.GET.category == 'daily' %}selected{% endif %}>일상</option>
+      <option value="work" {% if request.GET.category == 'work' %}selected{% endif %}>업무</option>
+      <option value="personal" {% if request.GET.category == 'personal' %}selected{% endif %}>개인</option>
+    </select>
+  </div>
+  <div class="col-auto">
+    <button class="btn btn-outline-secondary" type="submit">필터</button>
+    <a class="btn btn-outline-dark" href="{% url 'memos:list' %}">초기화</a>
+  </div>
+</form>
+<table class="table table-striped">
+  <thead><tr><th>제목</th><th>범주</th><th>공개</th><th>수정</th></tr></thead>
+  <tbody>
+    {% for memo in object_list %}
+      <tr>
+        <td><a href="{% url 'memos:detail' memo.pk %}">{{ memo.title }}</a></td>
+        <td>{{ memo.get_category_display|default:"-" }}</td>
+        <td>{{ memo.is_public|yesno:"예,아니오" }}</td>
+        <td><a class="btn btn-sm btn-outline-secondary" href="{% url 'memos:edit' memo.pk %}">수정</a></td>
+      </tr>
+    {% empty %}
+      <tr><td colspan="4" class="text-center">메모가 없습니다.</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
