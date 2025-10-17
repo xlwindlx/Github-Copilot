@@ -14,9 +14,9 @@
       <ul class="navbar-nav">
         {% if user.is_authenticated %}
           <li class="nav-item"><span class="nav-link">{{ user.username }}</span></li>
-          <li class="nav-item"><a class="nav-link" href="/admin/logout/">로그아웃</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'users:logout' %}">로그아웃</a></li>
         {% else %}
-          <li class="nav-item"><a class="nav-link" href="/admin/login/">로그인</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'users:login' %}">로그인</a></li>
         {% endif %}
       </ul>
     </div>
