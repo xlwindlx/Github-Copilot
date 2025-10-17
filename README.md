@@ -4,6 +4,10 @@
 
 ## 빠른 시작
 
+권장 Python: 3.11 또는 3.12 (Django 4.2 LTS 호환)
+
+주의: 로컬에서 Python 3.14는 Django 4.2와 호환되지 않을 수 있습니다. 테스트가 비정상 동작한다면 3.11~3.12 버전을 사용하세요. CI는 3.11을 사용합니다.
+
 1) 가상환경 및 설치
 
 ```powershell
@@ -43,6 +47,13 @@ python manage.py test -v 2
 pip install -r requirements-dev.txt
 ruff check .
 black --check .
+```
+
+pre-commit 훅(선택):
+
+```powershell
+pip install -r requirements-dev.txt
+pre-commit install
 ```
 
 ## 배포 참고
