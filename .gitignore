@@ -19,7 +19,7 @@ media/
 
 # Env files
 .env
-.env.*
+!.env.example
 
 # IDE/OS
 .vscode/
