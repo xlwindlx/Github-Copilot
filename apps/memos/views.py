@@ -18,7 +18,11 @@ class MemoListView(LoginRequiredMixin, ListView):
 	paginate_by = 20
 
 	def get_queryset(self):
-		return Memo.objects.filter(owner=self.request.user)
+		qs = Memo.objects.filter(owner=self.request.user)
+		category = self.request.GET.get("category")
+		if category:
+			qs = qs.filter(category=category)
+		return qs
 
 
 class MemoDetailView(LoginRequiredMixin, DetailView):

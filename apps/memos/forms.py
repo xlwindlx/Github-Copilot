@@ -5,7 +5,7 @@ from .models import Memo
 class MemoForm(forms.ModelForm):
     class Meta:
         model = Memo
-        fields = ["title", "body", "is_public"]
+        fields = ["title", "body", "category", "is_public"]
 
     def clean_title(self):
         title = self.cleaned_data.get("title", "").strip()

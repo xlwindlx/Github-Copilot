@@ -14,19 +14,19 @@ class TestAuthFlows(TestCase):
                 "password": "pass1234",
                 "password_confirm": "pass1234",
             },
-            follow=True,
+            follow=False,
         )
-        self.assertEqual(resp.status_code, 200)
+        self.assertEqual(resp.status_code, 302)
         self.assertTrue(get_user_model().objects.filter(username="alice").exists())
 
         # Logout
-        resp = self.client.get(reverse("users:logout"), follow=True)
-        self.assertEqual(resp.status_code, 200)
+        resp = self.client.get(reverse("users:logout"), follow=False)
+        self.assertEqual(resp.status_code, 302)
 
         # Login
         resp = self.client.post(
             reverse("users:login"),
             data={"username": "alice", "password": "pass1234"},
-            follow=True,
+            follow=False,
         )
-        self.assertEqual(resp.status_code, 200)
+        self.assertEqual(resp.status_code, 302)
