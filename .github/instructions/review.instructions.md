@@ -5,7 +5,7 @@
 이 문서는 프로젝트의 코드 리뷰를 수행할 때 따라야 할 지침을 제공합니다.
 
 ## 1. 코드 스타일
-- Python 스타일 가이드는 [Python Style Guide](./python-style.md)를 따릅니다.
+- Python 스타일 가이드는 [Python Style Guide](./python.instructions.md)를 따릅니다.
 - 함수, 변수, 클래스 이름이 명명 규칙을 따르고 있는지 확인합니다.
 - 들여쓰기, 공백, 주석 등 코드의 가독성을 확인합니다.
 

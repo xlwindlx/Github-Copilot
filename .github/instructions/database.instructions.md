@@ -1,3 +1,7 @@
+---
+applyTo: "**/*.sqlite3, *.sql"
+---
+
 # Database
 - 데이터베이스 테이블은 소문자이며 밑줄을 사용
 - 모든 테이브은 `id`를 primary key를 가지며 자동으로 증가
